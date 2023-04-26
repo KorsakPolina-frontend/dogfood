@@ -1,3 +1,11 @@
+import testData from "./assents/data.json";
+import Card from "./components/Card/Card";
+import Header from "./components/Header";
+
+const promoData = ["=)", "^_^", "O_o", "x_x", ";(", "=(", "OlO"];
+
+
+
 
 const Promo = (props) => {
     return (
@@ -10,15 +18,18 @@ const Promo = (props) => {
 
 const App = () => {
     return (
-      <div>
-        <h1>First Page</h1>
-        <div className="container">
-            <Promo text="First"/>
-            <Promo text="Second"/>
-            <Promo text={4 * 10}/>
-            <Promo/>
-        </div>
-      </div>
+        <>
+         <Header/>
+            <div>
+                 <h1>First Page</h1>
+                <div className="container">
+                 {testData.map((pro, i) => (
+                 <Card key={i} img={pro.pictures} name={pro.name} price={pro.price}/>
+                 ))}
+                 {promoData.map(el => <Promo key={el} text={el}/>)}
+                </div>
+             </div>
+         </>
     )
   }
 
