@@ -1,8 +1,9 @@
 {
   "name": "lk12-dogfood",
   "version": "0.1.0",
-    "dependencies": {
+  "dependencies": {
     "react": "^18.2.0",
+    "react-bootstrap-icons": "^1.10.3",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1"
   },

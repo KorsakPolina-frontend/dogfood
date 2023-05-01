@@ -1,3 +1,5 @@
+import {useState} from "react";
+
 import testData from "./assents/data.json";
 import Card from "./components/Card/Card";
 import Promo from "./components/Promo/Promo";
@@ -11,9 +13,11 @@ const promoData = ["=)", "^_^", "O_o", "x_x", ";(", "=(", "OlO"];
 
 
 const App = () => {
+    //const user = localStorage.getItem("user");
+    const [user, setUser] = useState(localStorage.getItem("user"))
     return (
         <>
-         <Header/>
+         <Header user={user} upd={setUser}/>
             <div>
                  <h1>First Page</h1>
                 <div className="container">
