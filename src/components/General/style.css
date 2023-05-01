@@ -22,3 +22,14 @@ footer {
 .logo img {
     height: 30px;
 }
+.footer__copy {
+    display: grid;
+    align-content: space-between;
+}
+.footer__nav {
+    display: grid;
+    gap: 10px;
+}
+.footer__nav a:hover {
+    color: orange;
+}
