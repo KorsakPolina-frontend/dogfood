@@ -17,7 +17,8 @@ const App = () => {
     const [user, setUser] = useState(localStorage.getItem("user"))
     return (
         <>
-         <Header user={user} upd={setUser}/>
+         <Header user={user} upd={setUser}
+                searchArr={testData}/>
             <div>
                  <h1>First Page</h1>
                 <div className="container">
