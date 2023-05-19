@@ -1,23 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const Search = ({data}) => {
+const Search = ({data, setGoods, setSearchResult}) => {
     //let text = "ololo"
     const [text, setText] = useState("");
     const [num, setNum] = useState(0);
     // в переменной хранится пустая строка
     const changeValue = (e) => {
-        console.log(e.target.value);
-        setText(e.target.value);
-       
-        setNum(data.filter(el => el.name.includes(e.target.value)).length);
+        let val = e.target.value.toLowerCase();
+        setText(val);
+        //setNum(data.filter(el => el.name.toLowerCase().includes(val)).length);
     }
     const changeText = () => {
         console.log("Click")
         setText("Привет!");
     }
+    useEffect(() => {
+        let str = "";
+        if (num) {
+            str = `По запросу {text} найдено {num} товаров`;
+        } else if (text) {
+            str = `По запросу {text} не найдено ни одного товара`;
+        } else {
+            str = "";
+        }
+        setSearchResult(str)
+    }, [num]);
+    useEffect(() => {
+        //console.log(olol);
+        let result = data.filter(el => el.name.toLowerCase().includes(text));
+        setGoods(result);
+        setNum(result.length);
+        console.log(text)
+    }, [text]);
     return <>
-    <input type="search" value={text} onChange={changeValue}/>
-    {text && <p>По запросу {text} найдено {num} товаров</p>}
+        <input type="search" value={text} onChange={changeValue}/>
     </>
 }
 

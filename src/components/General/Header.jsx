@@ -8,7 +8,13 @@ import {
 } from "react-bootstrap-icons";
 
 import Search from "../Search";
-const Header = ({user, upd, searchArr}) => {
+const Header = ({
+    user, 
+    upd, 
+    searchArr, 
+    setGoods, 
+    setSearchResult
+}) => {
     const login = () => {
         localStorage.setItem("user", "Polina");
         upd("Polina");
@@ -20,7 +26,11 @@ const Header = ({user, upd, searchArr}) => {
     return <header>
         <Logo/>
         <div className="search-block">
-            <Search data={searchArr}/>
+            <Search 
+            data={searchArr}
+            setGoods={setGoods}
+            setSearchResult={setSearchResult}
+            />
         </div>
         <nav className="header__menu">
             {user && <>
