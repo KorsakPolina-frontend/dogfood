@@ -1,7 +1,12 @@
 body {
-    background-color: springgreen;
+    background-color: white;
     font-family: sans-serif;
     margin: 0;
+}
+#root {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
 }
 a {
     color: inherit;
@@ -17,7 +22,16 @@ p {
     font-size: 20px;
 }
 .container {
+    padding: 30px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    align-content: flex-start;
+}
+
+.search-result {
+    grid-column-end: span 3;
+    margin: 0;
+    color: grey;
+    font-size: 1rem;
 }

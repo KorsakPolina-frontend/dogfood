@@ -26,16 +26,14 @@ const App = () => {
                 setGoods={setGoods}
                 setSearchResult={setSearchResult}
             />
-            <div>
-                 <h1>First Page</h1>
-                <div className="container">
+            <div className="container">
+                {searchResult && <p className="search-result">{searchResult}</p>}
                  {goods.map((pro, i) => (
                  <Card key={i} img={pro.pictures} name={pro.name} price={pro.price}/>
                  ))}
-                 {promoData.map(el => <Promo key={el} text={el}/>)}
-                </div>
-             </div>
-             <Footer/>
+                {/*promoData.map(el => <Promo key={el} text={el}/>)*/}
+            </div>
+            <Footer/>
         </>
     )
   }

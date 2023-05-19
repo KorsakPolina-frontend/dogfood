@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "./style.css";
 
 const Search = ({data, setGoods, setSearchResult}) => {
     //let text = "ololo"
@@ -10,20 +11,17 @@ const Search = ({data, setGoods, setSearchResult}) => {
         setText(val);
         //setNum(data.filter(el => el.name.toLowerCase().includes(val)).length);
     }
-    const changeText = () => {
-        console.log("Click")
-        setText("Привет!");
-    }
+    const changeText = () => {}
     useEffect(() => {
         let str = "";
-        if (num) {
-            str = `По запросу {text} найдено {num} товаров`;
+        if (num && text) {
+            str = `По запросу ${text} найдено ${num} товаров`;
         } else if (text) {
-            str = `По запросу {text} не найдено ни одного товара`;
+            str = `По запросу ${text} не найдено ни одного товара`;
         } else {
             str = "";
         }
-        setSearchResult(str)
+        setSearchResult(str);
     }, [num]);
     useEffect(() => {
         //console.log(olol);
@@ -33,7 +31,7 @@ const Search = ({data, setGoods, setSearchResult}) => {
         console.log(text)
     }, [text]);
     return <>
-        <input type="search" value={text} onChange={changeValue}/>
+        <input className="search" type="search" value={text} onChange={changeValue}/>
     </>
 }
 
