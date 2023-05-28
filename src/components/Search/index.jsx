@@ -22,7 +22,7 @@ const Search = ({data, setGoods, setSearchResult}) => {
             str = "";
         }
         setSearchResult(str);
-    }, [num]);
+    }, [num, text]);
     useEffect(() => {
         //console.log(olol);
         let result = data.filter(el => el.name.toLowerCase().includes(text));
