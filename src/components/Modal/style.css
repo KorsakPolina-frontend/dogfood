@@ -33,3 +33,23 @@
 .modal-close:hover {
     color: forestgreen;
 }
+h3 {
+    margin: 0;
+    margin-bottom: 20px;
+}
+.modal form {
+    display: grid;
+    gap: 10px;
+}
+.modal-btns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    font-size: 12px;
+}
+.modal-link {
+    border: 1px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
