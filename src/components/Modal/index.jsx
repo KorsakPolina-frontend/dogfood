@@ -2,8 +2,8 @@ import { useState } from "react";
 import {XOctagon} from "react-bootstrap-icons";
 import "./style.css";
 
-const Modal = () => {
-    const [isReg, setIsReg] = useState(true);
+const Modal = ({isActive, setIsActive}) => {
+    const [isReg, setIsReg] = useState(false);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [pwd, setPwd] = useState("");
@@ -20,7 +20,7 @@ const Modal = () => {
         setPwd("");
         setPwd2("");
     }
-    const handleForm = (e) => {
+    const handleForm = async (e) => {
         e.preventDefault();
         const body = {
             email: email,
@@ -28,12 +28,46 @@ const Modal = () => {
         }
         if (isReg) {
             body.name = name
+            body.group = "group-12"
         }
-        console.log(body)
+        console.log(body);
+        const path = `https://api.react-learning.ru/${isReg ? "signup" : "signin"}`;
+        const res = await fetch(path, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        })
+        const data = await res.json();
+        console.log(data);
+        if (isReg) {
+            if (data?._id) {
+            setIsReg(false);
+            }
+        } else {
+            if (data && data.token) {
+                localStorage.setItem("token", data.token);
+            }
+            if (data?.data) {
+                localStorage.setItem("user", data.data.name);
+                localStorage.setItem("user-id", data.data._id);
+                clearForm();
+            }
+            
+        }
     }
-    return <div className="modal-wrapper">
+
+    const st = {
+        display: isActive ? "flex" : "none"
+    }
+
+    return <div className="modal-wrapper" style={st}>
         <div className="modal">
-            <button className="modal-close">
+            <button 
+            className="modal-close" 
+            onClick={(e) => setIsActive(false)}
+            >
                 <XOctagon/>
             </button>
             <h3>{isReg ? "Регистрация" : "Вход"}</h3>

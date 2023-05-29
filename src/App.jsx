@@ -18,6 +18,7 @@ const App = () => {
     const [user, setUser] = useState(localStorage.getItem("user"))
     const  [goods, setGoods] = useState(testData)
     const [searchResult, setSearchResult] = useState("");
+    const [modalOpen, setModalOpen] = useState(false);
     return (
         <>
             <Header 
@@ -26,6 +27,7 @@ const App = () => {
                 searchArr={testData}
                 setGoods={setGoods}
                 setSearchResult={setSearchResult}
+                setModalOpen={setModalOpen}
             />
             <div className="container">
                 {searchResult && <p className="search-result">{searchResult}</p>}
@@ -35,7 +37,7 @@ const App = () => {
                 {/*promoData.map(el => <Promo key={el} text={el}/>)*/}
             </div>
             <Footer/>
-            <Modal/>
+            <Modal isActive={modalOpen} setIsActive={setModalOpen}/>
         </>
     )
   }
