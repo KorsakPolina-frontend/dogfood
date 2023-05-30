@@ -5,6 +5,7 @@ import Card from "./components/Card/Card";
 import Promo from "./components/Promo/Promo";
 import Modal from "./components/Modal";
 import {Header, Footer} from "./components/General";
+import Banner from "./components/General/Banner";
 
 const promoData = ["=)", "^_^", "O_o", "x_x", ";(", "=(", "OlO"];
 
@@ -47,6 +48,7 @@ const App = () => {
                 setSearchResult={setSearchResult}
                 setModalOpen={setModalOpen}
             />
+            <Banner/>
             <div className="container">
                 {searchResult && <p className="search-result">{searchResult}</p>}
                  {goods.map((pro, i) => (
@@ -54,6 +56,7 @@ const App = () => {
                  ))}
                 {/*promoData.map(el => <Promo key={el} text={el}/>)*/}
             </div>
+            
             <Footer/>
             <Modal 
                 isActive={modalOpen} 
