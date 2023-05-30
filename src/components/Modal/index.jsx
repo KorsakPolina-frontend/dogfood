@@ -2,7 +2,11 @@ import { useState } from "react";
 import {XOctagon} from "react-bootstrap-icons";
 import "./style.css";
 
-const Modal = ({isActive, setIsActive}) => {
+const Modal = ({
+    isActive, 
+    setIsActive, 
+    setUser
+}) => {
     const [isReg, setIsReg] = useState(false);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -51,8 +55,10 @@ const Modal = ({isActive, setIsActive}) => {
             }
             if (data?.data) {
                 localStorage.setItem("user", data.data.name);
+                setUser(data.data.name);
                 localStorage.setItem("user-id", data.data._id);
                 clearForm();
+                setIsActive(false);
             }
             
         }
