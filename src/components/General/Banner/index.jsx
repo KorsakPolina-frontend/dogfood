@@ -1,5 +1,5 @@
 import "./style.css";
-import { ArrowRightCircle } from "react-bootstrap-icons";
+import { ChevronCompactRight } from "react-bootstrap-icons";
 
 const Banner = () => <div className="banner">
     <h1>Крафтовые<br/>
@@ -7,7 +7,7 @@ const Banner = () => <div className="banner">
         собак</h1>
     <h3>Всегда свежие лакомства ручной<br/>
         работы с доставкой по России и Миру</h3>
-    <button className="btn-catalog">Каталог <ArrowRightCircle/></button>
+    <button className="btn-catalog">Каталог<ChevronCompactRight/></button>
 </div>
 
-export default Banner
+export default Banner;
