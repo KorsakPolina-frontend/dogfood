@@ -1,18 +1,20 @@
 import {useState, useEffect} from "react";
+import {Routes, Route} from "react-router-dom"
 
 import testData from "./assents/data.json";
-import Card from "./components/Card/Card";
-import Promo from "./components/Promo/Promo";
+
+//Подключаем компоненты
+//import Card from "./components/Card/Card";
+//import Promo from "./components/Promo/Promo";
 import Modal from "./components/Modal";
 import {Header, Footer } from "./components/General";
 import Banner from "./components/General/Banner";
 import Advertisement from "./components/Advertisement";
 
-const promoData = ["=)", "^_^", "O_o", "x_x", ";(", "=(", "OlO"];
-
-
-
-
+// Подключаем странички
+import Home from "./pages/Home"
+import Catalog from "./pages/Catalog";
+import OldPage from "./pages/Old";
 
 
 const App = () => {
@@ -49,15 +51,17 @@ const App = () => {
                 setSearchResult={setSearchResult}
                 setModalOpen={setModalOpen}
             />
-            <Banner/>
-            <Advertisement/>
-            <div className="container">
-                {searchResult && <p className="search-result">{searchResult}</p>}
-                 {goods.map((pro, i) => (
-                 <Card key={i} img={pro.pictures} name={pro.name} price={pro.price}/>
-                 ))}
-                {/*promoData.map(el => <Promo key={el} text={el}/>)*/}
-            </div>
+            
+            
+                <Routes>
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/catalog" element={<Catalog/>}/>
+                    <Route path="/old" element={
+                    <OldPage 
+                        searchText={searchResult}
+                        goods={goods}
+                    />}/>
+                </Routes>           
             
             <Footer/>
             <Modal 
