@@ -15,6 +15,8 @@ import Advertisement from "./components/Advertisement";
 import Home from "./pages/Home"
 import Catalog from "./pages/Catalog";
 import OldPage from "./pages/Old";
+import Profile from "./pages/Profile";
+import Product from "./pages/Product";
 
 
 const App = () => {
@@ -70,7 +72,7 @@ const App = () => {
                 setModalOpen={setModalOpen}
             />
             
-            
+            <main>
                 <Routes>
                     <Route path="/" element={<Home user={user} setActive={setModalOpen}/>}/>
                     <Route path="/catalog" element={<Catalog goods={goods}/>}/>
@@ -79,8 +81,12 @@ const App = () => {
                         searchText={searchResult}
                         goods={goods}
                     />}/>
+                    <Route path="/profile" element={
+                    <Profile user={user} setUser={setUser}/>}/>
+                    <Route path="/product/:id" element={<Product/>}/>
+                    
                 </Routes>           
-            
+            </main>
             <Footer/>
             <Modal 
                 isActive={modalOpen} 
