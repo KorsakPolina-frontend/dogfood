@@ -22,7 +22,10 @@ const App = () => {
     const [user, setUser] = useState(localStorage.getItem("user"));
     const [userId, setUserId] = useState(localStorage.getItem("user-id"));
     const [token, setToken] = useState(localStorage.getItem("token"));
-    const  [goods, setGoods] = useState(testData);
+
+    const [baseData, setBaseData] = useState([]);
+
+    const [goods, setGoods] = useState(baseData);
     const [searchResult, setSearchResult] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -40,13 +43,28 @@ const App = () => {
 
     useEffect(() => {
         console.log("token", token);
+        if (token) {
+            fetch("https://api.react-learning.ru/products", {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    setBaseData(data.products);
+            })
+        }
     }, [token]);
+
+    useEffect(() => {
+        setGoods(baseData);
+    }, [baseData])
     return (
         <>
             <Header 
                 user={user}
                 upd={setUser}
-                searchArr={testData}
+                searchArr={baseData}
                 setGoods={setGoods}
                 setSearchResult={setSearchResult}
                 setModalOpen={setModalOpen}
@@ -54,8 +72,8 @@ const App = () => {
             
             
                 <Routes>
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="/catalog" element={<Catalog/>}/>
+                    <Route path="/" element={<Home user={user} setActive={setModalOpen}/>}/>
+                    <Route path="/catalog" element={<Catalog goods={goods}/>}/>
                     <Route path="/old" element={
                     <OldPage 
                         searchText={searchResult}

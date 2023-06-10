@@ -8,6 +8,7 @@ import {
 } from "react-bootstrap-icons";
 
 import Search from "../Search";
+import { Link } from "react-router-dom";
 const Header = ({
     user, 
     upd, 
@@ -36,15 +37,15 @@ const Header = ({
         </div>
         <nav className="header__menu">
             {user && <>
-                <a href="">
+                <Link to="/">
                     <BalloonHeart title="Избранное"/>
-                </a>
-                <a href="">
+                </Link>
+                <Link to="/">
                     <Cart4 title="Корзина"/>
-                </a>
-                <a href="">
+                </Link>
+                <Link to="/">
                     <PersonCircle title="Личный кабинет"/>
-                </a>
+                </Link>
             </>}
             <span>   
                 {!user && <BuildingUp title="Войти" onClick={login}/>}
