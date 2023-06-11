@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {SuitHeart, SuitHeartFill} from "react-bootstrap-icons"
 import "./card.css";
 
 //const Card = (props) => {
@@ -19,9 +20,25 @@ const Card = ({
     pictures,
     price,
     tags,
-    _id
+    _id,
+    user,
+    setBaseData
 }) => {
-    return <div className="card-lite">
+    const [isLike, setIsLike] = useState(likes.includes(user));
+    const likeHendler = () => {
+        setIsLike(!isLike);
+        setBaseData((old) => old.map(el => {
+            if (el._id === _id) {
+               isLike 
+               ? el.likes = el.likes.filter(lk => lk !== user)
+               : el.likes.push(user);
+            }
+            return el;
+        }))
+    }
+    
+    return <div className="card-lite" id={"pro_" + _id}>
+        <span className="card-like" onClick={likeHendler}>{isLike ? <SuitHeartFill/> : <SuitHeart/>}</span>
         <img src={pictures} alt={name}/>
         <h4>{price} ₽</h4>
         <p>{name}</p>

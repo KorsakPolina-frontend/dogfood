@@ -1,12 +1,35 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 
 const Product = () => {
     const { id } = useParams()
+    const [data, setData] = useState({});
+
+    useEffect(() => {
+        fetch(`https://api.react-learning.ru/products/${id}`, {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+        .then(res => res.json())
+        .then(serverData => {
+            console.log(id, data);
+            setData(serverData);
+        })
+    }, []);
     return <>
-    <h1>Страница товара {id}</h1>
+    <Link to={`/catalog#pro_${id}`}>Назад</Link>
+    {data.name 
+        ? <>
+            <hi>{data.name}</hi>
+            <img src={data.pictures} alt={data.name}/>
+          </> 
+        : <div className="info" style={{textAlign: "center"}}> 
+            Товара {id} не существует<br/>или<br/>он еще не загружен
+          </div>
+        }
     </>
 }
 
-export default Product
+export default Product;
