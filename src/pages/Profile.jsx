@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router-dom";
+import {Button} from "react-bootstrap";
 
 
 const Profile = ({user, setUser}) => {
@@ -11,6 +12,8 @@ const Profile = ({user, setUser}) => {
     return <>
         <h1>Личный кабинет</h1>
         <p>Привет, {user}!</p>
+        <Button variant="warning" as={Link} to="/add/product/new">Добавить товар</Button>
+        <br/>
         <button onClick={logOut}>Выйти из аккаунта</button>
     </>
 }
