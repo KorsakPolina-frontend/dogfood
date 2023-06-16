@@ -14,15 +14,15 @@ const Product = () => {
         })
         .then(res => res.json())
         .then(serverData => {
-            console.log(id, data);
+            console.log(id, serverData);
             setData(serverData);
         })
-    }, []);
+    }, [])
     return <>
     <Link to={`/catalog#pro_${id}`}>Назад</Link>
     {data.name 
         ? <>
-            <hi>{data.name}</hi>
+            <h1>{data.name}</h1>
             <img src={data.pictures} alt={data.name}/>
           </> 
         : <div className="info" style={{textAlign: "center"}}> 
