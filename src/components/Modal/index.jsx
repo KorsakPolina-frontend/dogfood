@@ -69,7 +69,7 @@ const Modal = ({
     }
 
     return <div className="modal-wrapper" style={st}>
-        <div className="modal">
+        <div className="modal__custom">
             <button 
             className="modal-close" 
             onClick={(e) => setIsActive(false)}

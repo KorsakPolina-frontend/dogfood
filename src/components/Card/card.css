@@ -9,6 +9,7 @@
     align-content: flex-start;
     position: relative;
     overflow: hidden;
+    
 }
 .card-lite h4 {
     margin: 0;
@@ -19,6 +20,7 @@
 .card-lite img {
     height: 100%;
     justify-self: center;
+   
 }
 .card-lite button {
     position: relative;

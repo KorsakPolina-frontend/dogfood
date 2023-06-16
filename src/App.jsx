@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, createContext} from "react";
 import {Routes, Route} from "react-router-dom"
 
 
@@ -60,6 +60,9 @@ const App = () => {
     useEffect(() => {
         setGoods(baseData);
     }, [baseData])
+
+    
+
     return (
         <>
             <Header 
@@ -78,6 +81,7 @@ const App = () => {
                             goods={goods}
                             setBaseData={setBaseData}
                             userId={userId}
+                            searchText={searchResult}
                         />
                     }/>
                     <Route path="/old" element={

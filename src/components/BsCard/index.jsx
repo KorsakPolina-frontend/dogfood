@@ -34,7 +34,7 @@ const BsCard = ({
         <Card.Body className="d-flex flex-column">
             <Card.Title as="h4">{price} ₽</Card.Title>
             <Card.Text className="text-secondary fs-5 flex-grow-1">{name}</Card.Text>
-            <Button variant="warning" className="btn-warning w-100">Купить</Button>
+            <Button variant="warning" className="w-100">Купить</Button>
         </Card.Body>
         <Link to={`/product/${_id}`} className="card-link"></Link>
     </Card>
