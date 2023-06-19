@@ -1,11 +1,14 @@
+import { useContext } from "react";
 import {Container, Row, Col} from "react-bootstrap";
 import BsCard from "../components/BsCard";
+import Ctx from "../ctx"
 
 const Catalog = ({goods, setBaseData, userId, searchText}) => {
+    const {searchResult} = useContext(Ctx);
     return <Container className="d-blok">
 
         <Row className="g-4">
-        {searchText && <Col xs={12} className="search-result"> {searchText}
+        {searchResult && <Col xs={12} className="search-result"> {searchResult}
         </Col>}
             <Col xs={12}>
                 <h1 style={{margin: 0, gridColumnEnd: "span 3"}}>Каталог</h1>

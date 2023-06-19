@@ -14,7 +14,7 @@ const Header = ({
     upd, 
     searchArr, 
     setGoods, 
-    setSearchResult,
+    
     setModalOpen
 }) => {
     const login = () => {
@@ -29,7 +29,6 @@ const Header = ({
             <Search 
             data={searchArr}
             setGoods={setGoods}
-            setSearchResult={setSearchResult}
             />
         </div>
         <nav className="header__menu">

@@ -23,7 +23,6 @@ p {
 }
 .container {
     padding: 30px;
-    
     gap: 20px;
     align-content: flex-start;
 }
@@ -36,7 +35,7 @@ p {
 .home-conteiner {
     padding: 30px;
     margin-top: 20px;
-    
+    background-color: yellow;
 }
 .home-conteiner h1 {
     font-weight: bolder;
@@ -69,6 +68,21 @@ p {
     height: 30%;
     margin-left: auto;
     margin-right: 30px;
+}
+.home-info {
+    background-color: white;
+    padding: 30px;
+    gap: 20px;
+    
+
+    
+    
+}
+.home-text-info {
+    background-color: green;
+}
+.home-text-promo {
+    background-color: rgb(96, 96, 172);
 }
 @media (min-width: 576px){
     .container {

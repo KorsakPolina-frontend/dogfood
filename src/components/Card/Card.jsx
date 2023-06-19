@@ -24,7 +24,7 @@ const Card = ({
     user,
     setBaseData
 }) => {
-    const [isLike, setIsLike] = useState(likes.includes(user));
+    const [isLike, setIsLike] = useState(likes.includes(user) || []);
     const likeHendler = () => {
         setIsLike(!isLike);
         setBaseData((old) => old.map(el => {
@@ -38,7 +38,7 @@ const Card = ({
     }
     
     return <div className="card-lite" id={"pro_" + _id}>
-        <span className="card-like" onClick={likeHendler}>{isLike ? <SuitHeartFill/> : <SuitHeart/>}</span>
+        { likes && <span className="card-like" onClick={likeHendler}>{isLike ? <SuitHeartFill/> : <SuitHeart/>}</span>}
         <img src={pictures} alt={name}/>
         <h4>{price} ₽</h4>
         <p>{name}</p>

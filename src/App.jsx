@@ -1,7 +1,7 @@
-import {useState, useEffect, createContext} from "react";
+import React, {useState, useEffect, createContext} from "react";
 import {Routes, Route} from "react-router-dom"
 
-
+import Ctx from "./ctx";
 //import testData from "./assents/data.json";
 
 //Подключаем компоненты
@@ -61,16 +61,18 @@ const App = () => {
         setGoods(baseData);
     }, [baseData])
 
-    
+
 
     return (
-        <>
+        <Ctx.Provider value={{
+            searchResult,
+            setSearchResult
+        }}>
             <Header 
                 user={user}
                 upd={setUser}
                 searchArr={baseData}
                 setGoods={setGoods}
-                setSearchResult={setSearchResult}
                 setModalOpen={setModalOpen}
             />
             <main>
@@ -81,12 +83,10 @@ const App = () => {
                             goods={goods}
                             setBaseData={setBaseData}
                             userId={userId}
-                            searchText={searchResult}
                         />
                     }/>
                     <Route path="/old" element={
                         <OldPage 
-                            searchText={searchResult}
                             goods={goods}
                          />
                     }/>
@@ -103,7 +103,7 @@ const App = () => {
                 setIsActive={setModalOpen}
                 setUser={setUser}
                 />
-        </>
+        </Ctx.Provider>
     )
   }
 
