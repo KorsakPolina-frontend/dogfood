@@ -66,7 +66,9 @@ const App = () => {
     return (
         <Ctx.Provider value={{
             searchResult,
-            setSearchResult
+            setSearchResult,
+            setBaseData,
+            baseData
         }}>
             <Header 
                 user={user}
@@ -81,7 +83,6 @@ const App = () => {
                     <Route path="/catalog" element={
                         <Catalog 
                             goods={goods}
-                            setBaseData={setBaseData}
                             userId={userId}
                         />
                     }/>

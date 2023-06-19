@@ -3,7 +3,7 @@ import {Container, Row, Col} from "react-bootstrap";
 import BsCard from "../components/BsCard";
 import Ctx from "../ctx"
 
-const Catalog = ({goods, setBaseData, userId, searchText}) => {
+const Catalog = ({goods, userId}) => {
     const {searchResult} = useContext(Ctx);
     return <Container className="d-blok">
 
@@ -16,7 +16,7 @@ const Catalog = ({goods, setBaseData, userId, searchText}) => {
             {goods.map((pro, i) => (
                 <Col key={i} xs={12} sm={6} md={4} lg={3}>
                     <BsCard  img={pro.pictures} {...pro}
-                    setBaseData={setBaseData} user={userId}/>
+                     user={userId}/>
                 </Col>
             ))}
      </Row>

@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { Journals } from "react-bootstrap-icons";
 import {Button} from "react-bootstrap";
+import Slider from "../components/Slider";
+
 //import { Col, Button} from "react-bootstrap";
 
 const Home = ({user, setActive}) => {
@@ -31,6 +33,7 @@ const Home = ({user, setActive}) => {
                 </div>
             </div>
          </div> 
+         <Slider desktop={3} mobile={2}/>
          <div className="home-info">
          <div className="home-text-info">
             <h1>Наборы</h1>
