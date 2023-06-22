@@ -11,25 +11,37 @@ const BsCard = ({
     pictures,
     price,
     tags,
-    _id,
-    user
+    _id
+
 }) => {
-    const {setBaseData} =useContext(Ctx);
-    const [isLike, setIsLike] = useState(likes.includes(user));
+    const {setBaseData, userId, token} =useContext(Ctx);
+    const [isLike, setIsLike] = useState(likes.includes(userId));
+    const [likeFlag, setLikeFlag] = useState(false)
     const likeHendler = () => {
         setIsLike(!isLike);
-        setBaseData((old) => old.map(el => {
-            if (el._id === _id) {
-               isLike 
-               ? el.likes = el.likes.filter(lk => lk !== user)
-               : el.likes.push(user);
-            }
-            return el;
-        }))
+        setLikeFlag(true);
+    }   
+    useEffect(() => {
+        if (likeFlag) {
+        fetch(`https://api.react-learning.ru/products/likes/${_id}`, {
+          method: isLike ? "Put" : "DELETE",
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }  
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            setLikeFlag(false);
+            setBaseData((old) => old.map(el => el._id === data._id ? data : el))
+        })
     }
-    
+    }, [isLike])
     return <Card className="pt-3 h-100" id={"pro_" + _id}>
-        <span className="card-like" onClick={likeHendler}>{isLike ? <SuitHeartFill/> : <SuitHeart/>}</span>
+        {userId 
+        && <span className="card-like" onClick={likeHendler}>
+            {isLike ? <SuitHeartFill/> : <SuitHeart/>}
+            </span>}
         <Card.Img variant="top" src={pictures} alt={name} className="align-self w-auto" height="100"/>
         <Card.Body className="d-flex flex-column">
             <Card.Title as="h4">{price} ₽</Card.Title>

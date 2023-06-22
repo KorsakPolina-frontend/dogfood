@@ -3,9 +3,9 @@ import {useNavigate} from "react-router-dom"
 import "./style.css";
 import Ctx from "../../ctx";
 
-const Search = ({data, setGoods}) => {
+const Search = ({}) => {
     //let text = "ololo"
-    const {setSearchResult} = useContext(Ctx);
+    const {setSearchResult, baseData, setGoods} = useContext(Ctx);
     
     const navigate = useNavigate();
     const [text, setText] = useState("");
@@ -17,7 +17,6 @@ const Search = ({data, setGoods}) => {
         setText(val);
         //setNum(data.filter(el => el.name.toLowerCase().includes(val)).length);
     }
-    const changeText = () => {}
     useEffect(() => {
         let str = "";
         if (num && text) {
@@ -31,11 +30,11 @@ const Search = ({data, setGoods}) => {
     }, [num, text]);
     useEffect(() => {
         //console.log(olol);
-        let result = data.filter(el => el.name.toLowerCase().includes(text));
+        let result = baseData.filter(el => el.name.toLowerCase().includes(text));
         setGoods(result);
         setNum(result.length);
-        console.log(text)
-    }, [text]);
+        
+    }, [text, baseData]);
     return <>
         <input className="search" type="search" value={text} onChange={changeValue}/>
     </>

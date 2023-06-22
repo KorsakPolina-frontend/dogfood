@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-
+import {Card} from "react-bootstrap";
 
 const Product = () => {
     const { id } = useParams()
@@ -24,6 +24,12 @@ const Product = () => {
         ? <>
             <h1>{data.name}</h1>
             <img src={data.pictures} alt={data.name}/>
+            <Card style={{width: "18rem"}}>
+                <Card.Body>
+                    <Card.Title>Описание</Card.Title>
+                    <Card.Text>Скоро здесь будет текст</Card.Text>
+                </Card.Body>
+            </Card>
           </> 
         : <div className="info" style={{textAlign: "center"}}> 
             Товара {id} не существует<br/>или<br/>он еще не загружен

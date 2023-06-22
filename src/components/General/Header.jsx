@@ -33,10 +33,10 @@ const Header = ({
         </div>
         <nav className="header__menu">
             {user && <>
-                <Link to="/">
+                <Link to="/favorites">
                     <BalloonHeart title="Избранное"/>
                 </Link>
-                <Link to="/">
+                <Link to="/cart">
                     <Cart4 title="Корзина"/>
                 </Link>
                 <Link to="/profile">
