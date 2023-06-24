@@ -2,6 +2,7 @@ import React, {useState, useEffect, createContext} from "react";
 import {Routes, Route} from "react-router-dom"
 
 import Ctx from "./ctx";
+import Api from "./Api";
 //import testData from "./assents/data.json";
 
 //Подключаем компоненты
@@ -24,6 +25,7 @@ const App = () => {
     const [user, setUser] = useState(localStorage.getItem("user"));
     const [userId, setUserId] = useState(localStorage.getItem("user-id"));
     const [token, setToken] = useState(localStorage.getItem("token"));
+    const [api, setApi] = useState(new Api(token));
 
     const [baseData, setBaseData] = useState([]);
     const [goods, setGoods] = useState(baseData);
@@ -44,19 +46,22 @@ const App = () => {
     }, [user])
 
     useEffect(() => {
+        setApi(new Api(token));
         console.log("token", token);
-        if (token) {
-            fetch("https://api.react-learning.ru/products", {
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            })
-                .then(res => res.json())
-                .then(data => {
-                    setBaseData(data.products);
-            })
-        }
+       
     }, [token]);
+
+    useEffect(() => {
+        if (token) {
+           api.getProducts()
+            .then(data => {
+                console.log(data);
+                setBaseData(data.products);
+              })
+        } else {
+            setBaseData([]);
+        }
+    }, [api])
 
     useEffect(() => {
         //setGoods(baseData);
@@ -73,7 +78,8 @@ const App = () => {
             goods, 
             setGoods, 
             userId, 
-            token
+            token,
+            api
         }}>
             <Header 
                 user={user}

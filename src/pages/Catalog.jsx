@@ -9,7 +9,9 @@ import Pagination from "../components/Pagination";
 const Catalog = ({goods, userId}) => {
     const {searchResult} = useContext(Ctx);
     const paginate = usePagination(goods, 9)
-    
+    useEffect(() => {
+        paginate.step(1);
+    }, [searchResult])
 
     return <Container className="d-blok">
 
@@ -26,9 +28,9 @@ const Catalog = ({goods, userId}) => {
                      user={userId}/>
                 </Col>
             ))}
-            <Col xs={12} className="text - center d-flex justify-content-center flex-colum align-items-center">
-                <Pagination hk={paginate} />
-            </Col>
+            {paginate.pageData().length > 0 && <Col xs={12} className="text - center d-flex justify-content-center flex-colum align-items-center">
+                <Pagination hk={paginate} /></Col>
+            }
      </Row>
     </Container>
 }
