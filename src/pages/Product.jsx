@@ -1,12 +1,14 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import {Card} from "react-bootstrap";
+import {Basket2} from "react-bootstrap-icons";
 import Ctx from "../ctx";
 
 const Product = () => {
     const { id } = useParams()
-    const { api } = useContext(Ctx);
+    const { api, userId, setBaseData } = useContext(Ctx);
     const [data, setData] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
     api.getSingleProduct(id)
@@ -15,8 +17,20 @@ const Product = () => {
             setData(serverData);
         })
     }, [])
+
+    const delHandler = () => {
+        api.delSingleProduct(id)
+            .then(data => {
+                console.log(data)
+                setBaseData(prev => prev.filter(el => el._id !== id));
+                navigate("/catalog");
+            })
+    }
     return <>
     <Link to={`/catalog#pro_${id}`}>Назад</Link>
+    <div>
+        {data?.author?._id === userId && <Basket2 onClick={delHandler}/>}
+    </div>
     {data.name 
         ? <>
             <h1>{data.name}</h1>
