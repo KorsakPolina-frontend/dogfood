@@ -92,16 +92,16 @@ class Api {
         return fetch(`${this.path}/signup`, {
             method: "POST",
             headers: {
-                "Content-Type": "appliction/json"
+                "Content-Type": "application/json"
             },            
             body: JSON.stringify(body)
         }).then(res => res.json())
     }
     auth(body) {
-        return fetch(`${this.path}/sigin`, {
+        return fetch(`${this.path}/signin`, {
             method: "POST",
             headers: {
-                "Content-Type": "appliction/json"
+                "Content-Type": "application/json"
             }, 
             body: JSON.stringify(body)
         }).then(res => res.json())

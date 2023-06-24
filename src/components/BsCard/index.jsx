@@ -14,7 +14,7 @@ const BsCard = ({
     _id
 
 }) => {
-    const {setBaseData, userId, token} =useContext(Ctx);
+    const {setBaseData, userId, api} =useContext(Ctx);
     const [isLike, setIsLike] = useState(likes.includes(userId));
     const [likeFlag, setLikeFlag] = useState(false)
     const likeHendler = () => {
@@ -23,17 +23,15 @@ const BsCard = ({
     }   
     useEffect(() => {
         if (likeFlag) {
-        fetch(`https://api.react-learning.ru/products/likes/${_id}`, {
-          method: isLike ? "Put" : "DELETE",
-          headers: {
-            "Authorization": `Bearer ${token}`
-          }  
-        })
-        .then(res => res.json())
+        api.setLike(_id, isLike)
         .then(data => {
             console.log(data);
             setLikeFlag(false);
-            setBaseData((old) => old.map(el => el._id === data._id ? data : el))
+            //setBaseData((old) => old.map(el => el._id === data._id ? data : el))
+            api.getProducts()
+            .then(newData => {
+                setBaseData(newData.products);
+            })
         })
     }
     }, [isLike])

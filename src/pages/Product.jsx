@@ -1,18 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import {Card} from "react-bootstrap";
+import Ctx from "../ctx";
 
 const Product = () => {
     const { id } = useParams()
+    const { api } = useContext(Ctx);
     const [data, setData] = useState({});
 
     useEffect(() => {
-        fetch(`https://api.react-learning.ru/products/${id}`, {
-            headers: {
-                "Authorization": `Bearer ${localStorage.getItem("token")}`
-            }
-        })
-        .then(res => res.json())
+    api.getSingleProduct(id)
         .then(serverData => {
             console.log(id, serverData);
             setData(serverData);
