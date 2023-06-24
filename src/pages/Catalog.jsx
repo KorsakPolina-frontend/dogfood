@@ -1,26 +1,38 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import {Container, Row, Col} from "react-bootstrap";
 import BsCard from "../components/BsCard";
-import Ctx from "../ctx"
+import Ctx from "../ctx";
+import usePagination from "../hooks/usePagination";
+import Pagination from "../components/Pagination";
+
 
 const Catalog = ({goods, userId}) => {
     const {searchResult} = useContext(Ctx);
+    const paginate = usePagination(goods, 9)
+    
+
     return <Container className="d-blok">
 
         <Row className="g-4">
-        {searchResult && <Col xs={12} className="search-result"> {searchResult}
+        {searchResult && <Col xs={12} className="search-result">
+            {searchResult}
         </Col>}
             <Col xs={12}>
                 <h1 style={{margin: 0, gridColumnEnd: "span 3"}}>Каталог</h1>
             </Col>
-            {goods.map((pro, i) => (
+            {paginate.pageData().map((pro, i) => (
                 <Col key={i} xs={12} sm={6} md={4} lg={3}>
                     <BsCard  img={pro.pictures} {...pro}
                      user={userId}/>
                 </Col>
             ))}
+            <Col xs={12} className="text - center d-flex justify-content-center flex-colum align-items-center">
+                <Pagination hk={paginate} />
+            </Col>
      </Row>
     </Container>
 }
 
 export default Catalog;
+
+//<Pagination current={paginate.page} max={paginate.maxPage}/>
