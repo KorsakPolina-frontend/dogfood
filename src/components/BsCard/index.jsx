@@ -40,7 +40,7 @@ const BsCard = ({
         && <span className="card-like" onClick={likeHendler}>
             {isLike ? <SuitHeartFill/> : <SuitHeart/>}
             </span>}
-        <Card.Img variant="top" src={pictures} alt={name} className="align-self w-auto" height="100"/>
+        <Card.Img variant="top" src={pictures} alt={name} className="align-self w-auto" width="100"/>
         <Card.Body className="d-flex flex-column">
             <Card.Title as="h4">{price} ₽</Card.Title>
             <Card.Text className="text-secondary fs-5 flex-grow-1">{name}</Card.Text>

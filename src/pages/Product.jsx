@@ -1,8 +1,9 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import {Button, Card} from "react-bootstrap";
-import {Basket2, ArrowLeft} from "react-bootstrap-icons";
+import {Button, Card, Stack} from "react-bootstrap";
+import {Basket2, ArrowLeft, Truck} from "react-bootstrap-icons";
 import Ctx from "../ctx";
+
 
 const Product = () => {
     const { id } = useParams()
@@ -28,22 +29,34 @@ const Product = () => {
     }
     return <div className="d-flex justify-content-around container">
         <Card>
-            <div className="d-grid gap-2">
+            <div style={{margin: "20px"}}>
                 <Button variant="secondary"><ArrowLeft/><Link to={`/catalog#pro_${id}`}> Назад</Link></Button>
                 {data?.author?._id === userId && <Button variant="outline-secondary"> <Basket2 onClick={delHandler}/></Button>}
             </div>
             <div className="container">
     {data.name 
         ? <>
-            <h1>{data.name}</h1>
-            <Card.Img variant="top" src={data.pictures} alt={data.name}/>
-                <Card.Body>
-                <Card.Title>{data.price} ₽</Card.Title>
-                 <Button variant="warning">В корзину</Button>
-                    <Card.Title>Описание</Card.Title>
-                    <Card.Text>{data.description}</Card.Text>
-                    
-                </Card.Body>
+            <h2>{data.name}</h2>
+            <div className="product-img">
+                <Card.Img variant="top" src={data.pictures} alt={data.name} style={{ width: '18rem' }}/>
+                <div className="product-price">
+                    <Card.Title>{data.price} ₽</Card.Title>
+                    <Button variant="warning">В корзину</Button>
+                    <Card border="primary" style={{ width: '100%', fontSize: '14px' }}>
+                        <Card.Header><Truck/> Доставка по всему миру</Card.Header>
+                        <Card.Body>
+                            <Card.Title style={{ fontSize: '12px' }}>Доставка курьером - от 300 ₽</Card.Title>
+                            <Card.Title style={{ fontSize: '12px' }}>Доставка в пункт выдачи - от 150 ₽</Card.Title>
+                        </Card.Body>
+                    </Card>
+                    <br />
+                </div>
+            </div>
+            <div className="container">
+                    <Card.Title style={{fontWeight: '700'}}>Описание</Card.Title>
+                    <Card.Text style={{color: "black", fontSize: '16px'}}>{data.description}</Card.Text>
+            </div>        
+                
             
           </> 
         : <div className="info" style={{textAlign: "center"}}> 

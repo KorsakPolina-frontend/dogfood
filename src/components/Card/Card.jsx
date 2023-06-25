@@ -40,7 +40,7 @@ const Card = ({
     
     return <div className="card-lite" id={"pro_" + _id}>
         { likes && <span className="card-like" onClick={likeHendler}>{isLike ? <SuitHeartFill/> : <SuitHeart/>}</span>}
-        <img src={pictures} alt={name}/>
+        <img src={pictures} alt={name} />
         <h4>{price} ₽</h4>
         <p>{name}</p>
         <button>Купить</button>
