@@ -30,7 +30,8 @@ const Product = () => {
         },
 ]
 
-    const addReview =() => {
+    const addReview =(e) => {
+        e.preventDefault();
         api.setReview(data._id, {
             text: revText,
             rating: revRating
@@ -122,6 +123,9 @@ const Product = () => {
                             </span>
                             <Card.Title>{el.rating}</Card.Title>
                             <Card.Text className="fs-6 text-secondary">{el.text}</Card.Text>
+                            {el.author._id === userId && <span className="text-danger position-absolute end-0 bottom-0 pe-3 pb-2">
+                                <Basket2 onClick={() => delReview(el._id)}/>
+                            </span>}
                             </Card.Body>
                         </Card>
                     </Col>
@@ -143,7 +147,7 @@ const Product = () => {
         }
         { !hideForm && <Col xs={12} className="mt-5">
             <h3>Новый отзыв</h3>
-            <Form>
+            <Form onSubmit={addReview}>
                 <Form.Group className="mb-3">
                     <Form.Label htmlFor="rating">Рeйтинг (0-5)</Form.Label>
                     <Form.Control type="number" 
