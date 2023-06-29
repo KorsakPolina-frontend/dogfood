@@ -14,9 +14,11 @@ const BsCard = ({
     _id
 
 }) => {
-    const {setBaseData, userId, api} =useContext(Ctx);
+    const {setBaseData, userId, api, basket, setBasket} =useContext(Ctx);
     const [isLike, setIsLike] = useState(likes.includes(userId));
-    const [likeFlag, setLikeFlag] = useState(false)
+    const [likeFlag, setLikeFlag] = useState(false);
+    const inBasket = basket.filter(el => _id === el.id).length > 0;
+
     const likeHendler = () => {
         setIsLike(!isLike);
         setLikeFlag(true);
@@ -35,16 +37,36 @@ const BsCard = ({
         })
     }
     }, [isLike])
+
+    const addToBasket = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setBasket(prev => [...prev, {
+            id: _id,
+            price,
+            discount,
+            cnt: 1
+        }])
+    }
+
+
     return <Card className="pt-3 h-100" id={"pro_" + _id}>
         {userId 
         && <span className="card-like" onClick={likeHendler}>
             {isLike ? <SuitHeartFill/> : <SuitHeart/>}
             </span>}
         <Card.Img variant="top" src={pictures} alt={name} className="align-self w-auto" width="100"/>
-        <Card.Body className="d-flex flex-column">
+        <Card.Body className="d-flex flex-column position-relative"
+        >
             <Card.Title as="h4">{price} ₽</Card.Title>
             <Card.Text className="text-secondary fs-5 flex-grow-1">{name}</Card.Text>
-            <Button variant="warning" className="w-100">Купить</Button>
+            <Button 
+            variant="warning" 
+            className="w-100 position-relative"
+            disabled={inBasket} 
+            onClick={addToBasket}
+            style={{zIndex: "1"}}
+            >Купить</Button>
         </Card.Body>
         <Link to={`/product/${_id}`} className="card-link"></Link>
     </Card>

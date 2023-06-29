@@ -19,13 +19,21 @@ import Profile from "./pages/Profile";
 import Product from "./pages/Product";
 import AddProduct from "./pages/AddProduct";
 import Favorites from "./pages/Favorites";
+import Basket from "./pages/Basket";
 
 const App = () => {
+    let basketStore = localStorage.getItem("basket12");
+    if (basketStore && basketStore[0] === "[") {
+        basketStore = JSON.parse(basketStore);
+    } else {
+        basketStore = [];
+    }
     //const user = localStorage.getItem("user");
     const [user, setUser] = useState(localStorage.getItem("user"));
     const [userId, setUserId] = useState(localStorage.getItem("user-id"));
     const [token, setToken] = useState(localStorage.getItem("token"));
     const [api, setApi] = useState(new Api(token));
+    const [basket, setBasket] = useState(basketStore);
 
     const [baseData, setBaseData] = useState([]);
     const [goods, setGoods] = useState(baseData);
@@ -44,6 +52,10 @@ const App = () => {
             setToken(null);
         }
     }, [user])
+
+    useEffect(() => {
+        localStorage.setItem("basket12", JSON.stringify(basket));
+    }, [basket])
 
     useEffect(() => {
         setApi(new Api(token));
@@ -79,7 +91,9 @@ const App = () => {
             setGoods, 
             userId, 
             token,
-            api
+            api,
+            basket,
+            setBasket
         }}>
             <Header 
                 user={user}
@@ -108,6 +122,7 @@ const App = () => {
                     <Route path="/product/:id" element={<Product/>}/>
                     <Route path="/add/product/new" element={<AddProduct/>} />
                     <Route path="/favorites" element={<Favorites/>} />
+                    <Route path="/basket" element={<Basket/>} />
                 </Routes>           
             </main>
             <Footer/>

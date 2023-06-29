@@ -24,8 +24,12 @@ const Card = ({
     _id,
     user
 }) => {
-    const {setBaseData} = useContext(Ctx)
+    const {setBaseData, basket, setBasket} = useContext(Ctx)
     const [isLike, setIsLike] = useState(likes.includes(user) || []);
+    
+
+
+
     const likeHendler = () => {
         setIsLike(!isLike);
         setBaseData((old) => old.map(el => {
@@ -38,12 +42,15 @@ const Card = ({
         }))
     }
     
+    
     return <div className="card-lite" id={"pro_" + _id}>
         { likes && <span className="card-like" onClick={likeHendler}>{isLike ? <SuitHeartFill/> : <SuitHeart/>}</span>}
         <img src={pictures} alt={name} />
         <h4>{price} ₽</h4>
         <p>{name}</p>
-        <button>Купить</button>
+        <button 
+        
+        >Купить</button>
         <Link to={`/product/${_id}`} className="card-link"></Link>
     </div>
 }

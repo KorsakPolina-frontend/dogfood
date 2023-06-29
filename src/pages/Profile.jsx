@@ -4,10 +4,11 @@ import {Button, Container, Form, Row, Col, Figure, Image} from "react-bootstrap"
 import {CheckSquare, PencilSquare, XSquare} from "react-bootstrap-icons";
 import Ctx from "../ctx";
 import UpdatedInput from "../components/Updatedinput";
+import BsCard from "../components/BsCard";
 
 const Profile = ({setUser}) => {
     const navigate = useNavigate()
-    const { api } = useContext(Ctx);
+    const { api, baseData } = useContext(Ctx);
     const [userData, setUserData] = useState({});
     const [inpName, setInpName] = useState(false);
     const [inpEmail, setInpEmail] = useState(false);
@@ -21,9 +22,13 @@ const Profile = ({setUser}) => {
    // ]
 
     const updUser = (name, val) => {
-        let body = {...userData}
-        if (name !== "avatar") {
-            delete body.avatar;
+        let body = {
+            name: userData.name,
+            about: userData.about
+        }
+        
+        if (name === "avatar") {
+            body = {avatar: userData.avatar};
         }
         body[name] = val;
         api.updAdmin(body, name === "avatar").then(data => setUserData(data));
@@ -53,13 +58,7 @@ const Profile = ({setUser}) => {
                         upd={updUser}
                         name="name"
                     /></div>
-                    <div><UpdatedInput 
-                        val={userData.email} 
-                        isActive={inpEmail} 
-                        changeActive={setInpEmail}
-                        upd={updUser}
-                        name="email"
-                    /></div>
+                    <div className="py-3">{userData.email}</div>
                     <div><UpdatedInput 
                         val={userData.about} 
                         isActive={inpAbout} 
@@ -89,6 +88,14 @@ const Profile = ({setUser}) => {
             <br/>
             <Button variant="secondary" onClick={logOut}>Выйти из аккаунта</Button>
             </>}
+        </Row>
+        <Row>
+            <Col xs={12}>
+                <h3>Мои товары</h3>
+            </Col>
+            {baseData.filter(el => el.author._id === userData._id).map(el => <Col xs={6} md={3} key={el._id}>
+                <BsCard {...el}/>
+            </Col>)}
         </Row>
         </Container>
     </>
