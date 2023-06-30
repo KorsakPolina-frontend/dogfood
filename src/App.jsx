@@ -3,15 +3,9 @@ import {Routes, Route} from "react-router-dom"
 
 import Ctx from "./ctx";
 import Api from "./Api";
-//import testData from "./assents/data.json";
-
-//Подключаем компоненты
-//import Card from "./components/Card/Card";
-//import Promo from "./components/Promo/Promo";
 import Modal from "./components/Modal";
 import {Header, Footer } from "./components/General";
 
-// Подключаем странички
 import Home from "./pages/Home"
 import Catalog from "./pages/Catalog";
 import OldPage from "./pages/Old";
@@ -28,7 +22,7 @@ const App = () => {
     } else {
         basketStore = [];
     }
-    //const user = localStorage.getItem("user");
+    
     const [user, setUser] = useState(localStorage.getItem("user"));
     const [userId, setUserId] = useState(localStorage.getItem("user-id"));
     const [token, setToken] = useState(localStorage.getItem("token"));
@@ -76,10 +70,8 @@ const App = () => {
     }, [api])
 
     useEffect(() => {
-        //setGoods(baseData);
+        
     }, [baseData])
-
-
 
     return (
         <Ctx.Provider value={{

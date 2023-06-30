@@ -36,5 +36,3 @@ const Catalog = ({goods, userId}) => {
 }
 
 export default Catalog;
-
-//<Pagination current={paginate.page} max={paginate.maxPage}/>

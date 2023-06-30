@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import {Button, Container, Form, Row, Col, Figure, Image} from "react-bootstrap";
-import {CheckSquare, PencilSquare, XSquare} from "react-bootstrap-icons";
 import Ctx from "../ctx";
 import UpdatedInput from "../components/Updatedinput";
 import BsCard from "../components/BsCard";
@@ -14,12 +13,6 @@ const Profile = ({setUser}) => {
     const [inpEmail, setInpEmail] = useState(false);
     const [inpAbout, setInpAbout] = useState(false);
     const [inpAvatar, setInpAvatar] = useState(false);
-
-    //const userInfo = [
-       // {name: "name", text: "Имя"},
-      //  {name: "email", text: "Email"},
-      //  {name: "about", text: "Подробности"}
-   // ]
 
     const updUser = (name, val) => {
         let body = {

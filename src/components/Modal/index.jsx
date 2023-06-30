@@ -37,15 +37,6 @@ const Modal = ({
             body.group = "group-12"
         }
         console.log(body);
-        //const path = `https://api.react-learning.ru/${isReg ? "signup" : "signin"}`;
-       // const res = await fetch(path, {
-           // method: "POST",
-           // headers: {
-           //     "Content-Type": "application/json"
-           // },
-           // body: JSON.stringify(body)
-        //})
-       // const data = await res.json();
         const data = await (isReg ? api.register(body) : api.auth(body));
         console.log(data);
         if (isReg) {
@@ -119,5 +110,3 @@ const Modal = ({
 }
 
 export default Modal;
-
-/* сайт с API https://api.react-learning.ru/api-docs/*/

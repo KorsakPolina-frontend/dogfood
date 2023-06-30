@@ -1,16 +1,15 @@
 import { Pagination as BsPag } from "react-bootstrap";
 
 const Pagination = ({hk}) => {
-    let items = [];
-    let i = 1;
-    do {
-        items.push(<BsPag.Item key={i} active={i === hk.page}>{i}</BsPag.Item>)
-        i++;
-    } while (i <= hk.maxPage);
-
     const step = (e) => {
         hk.step(+e.target.innerText)
     }
+    let items = [];
+    let i = 1;
+    do {
+        items.push(<BsPag.Item key={i} active={i === hk.page} onClick={step}>{i}</BsPag.Item>)
+        i++;
+    } while (i <= hk.maxPage);
 
     return <>
         <BsPag>

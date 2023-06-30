@@ -15,7 +15,7 @@ const Search = ({}) => {
         navigate("/catalog");
         let val = e.target.value.toLowerCase();
         setText(val);
-        //setNum(data.filter(el => el.name.toLowerCase().includes(val)).length);
+        
     }
     useEffect(() => {
         let str = "";

@@ -4,16 +4,6 @@ import {SuitHeart, SuitHeartFill} from "react-bootstrap-icons"
 import "./card.css";
 import Ctx from "../../ctx";
 
-//const Card = (props) => {
-//    return <div className="card-lite">
-//        <img src={props.img} alt={props.name}/>
- //       <h4>{props.price} ₽</h4>
-//        <p>{props.name}</p>
- //       <button>Купить</button>
- //   </div>
-//}
-
-
 const Card = ({
     discount,
     likes,
@@ -27,9 +17,6 @@ const Card = ({
     const {setBaseData, basket, setBasket} = useContext(Ctx)
     const [isLike, setIsLike] = useState(likes.includes(user) || []);
     
-
-
-
     const likeHendler = () => {
         setIsLike(!isLike);
         setBaseData((old) => old.map(el => {
@@ -41,8 +28,7 @@ const Card = ({
             return el;
         }))
     }
-    
-    
+       
     return <div className="card-lite" id={"pro_" + _id}>
         { likes && <span className="card-like" onClick={likeHendler}>{isLike ? <SuitHeartFill/> : <SuitHeart/>}</span>}
         <img src={pictures} alt={name} />

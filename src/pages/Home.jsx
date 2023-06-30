@@ -3,8 +3,6 @@ import { Journals } from "react-bootstrap-icons";
 import {Button} from "react-bootstrap";
 import Slider from "../components/Slider";
 
-//import { Col, Button} from "react-bootstrap";
-
 const Home = ({user, setActive}) => {
     return <>
         <div className="info">

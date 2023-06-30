@@ -5,7 +5,6 @@ import {
     Cart4,
     PersonCircle,
     BuildingUp,
-    //BuildingDown
 } from "react-bootstrap-icons";
 
 import Search from "../Search";
@@ -22,8 +21,6 @@ const Header = ({
     const {basket} = useContext(Ctx);
     const login = () => {
         setModalOpen(true)
-        //localStorage.setItem("user", "Polina");
-        //upd("Polina");
     }
     
     return <header>
