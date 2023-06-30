@@ -15,6 +15,7 @@ const Product = () => {
     const [revRating, setRevRating] = useState(0);
     const [hideForm, setHideForm] = useState(true);
     const navigate = useNavigate();
+    
     const tabelInfo = [
         {
         name: "wight",
@@ -67,22 +68,38 @@ const Product = () => {
     }
     return <Container style={{gridTemplateColumns: "1fr"}}>
         <Row className="g-3">
-    <Link to={`/catalog#pro_${id}`}>Назад</Link>
+            <Col>
+                <Button variant="secondary"><ArrowLeft/><Link to={`/catalog#pro_${id}`}> Назад</Link></Button>
+            </Col>
     
     {data.name 
         ? <>
             <Col xs={12}>
                 <div>
-                    {data.author?._id === userId && <Basket2 onClick={delHandler}/>}
+                    {data.author?._id === userId && <Button variant="outline-secondary"><Basket2 onClick={delHandler}/></Button>}
                 </div>
-                <h1>{data.name}</h1>
+                <div className="py-4">
+                    <h2>{data.name}</h2>
+                </div>
             </Col>
             <Col xs={12} md={6}>
-                <img src={data.pictures} alt={data.name} className="w-100"/>
+                <img src={data.pictures} alt={data.name} className="w-75"/>
             </Col>
             <Col xs={12} md={6} className={`${data.discount ? "text-danger" : "text-secondary"} fw-bold fs-1`}>
-            {Math.ceil(data.price * (100 - data.discount) / 100)} ₽
-            </Col>
+                {Math.ceil(data.price * (100 - data.discount) / 100)} ₽
+                <Button 
+                    variant="warning" 
+                    className="px-5" 
+                    style={{ margin: ' 0 20px ' }} 
+                >В корзину</Button>
+                <Card border="primary" style={{ width: '75%', fontSize: '14px', margin: '20px 0' }}>
+                        <Card.Header><Truck/> Доставка по всему миру</Card.Header>
+                        <Card.Body>
+                            <Card.Title style={{ fontSize: '12px' }}>Доставка курьером - от 300 ₽</Card.Title>
+                            <Card.Title style={{ fontSize: '12px' }}>Доставка в пункт выдачи - от 150 ₽</Card.Title>
+                        </Card.Body>
+                    </Card>
+            </Col>       
             <Col xs={12}>
                 <Table>
                     <tbody>

@@ -1,5 +1,5 @@
 import {useState, useContext, Fragment} from "react";
-import {Container, Table, ButtonGroup, Button} from "react-bootstrap";
+import {Container, Table, ButtonGroup, Button, Row} from "react-bootstrap";
 import Ctx from "../ctx";
 import {Trash3} from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
@@ -36,7 +36,7 @@ const Basket = ({}) => {
 
     return <Container style={{gridTemplateColumns: "1fr"}}>
         <h1>Корзина</h1>
-        <Table>
+        <Table >
             <tbody>
                 {basket.map(el => <tr key={el.id}>
                     {filteredData
@@ -87,7 +87,11 @@ const Basket = ({}) => {
                         }</td>
                 </tr>
             </tfoot>
+            
         </Table>
+        <Row>
+            <Button md={{ span: 4, offset: 4 }} variant="outline-warning">Оформить заказ</Button>
+        </Row>
     </Container>
 }
 
